@@ -40,6 +40,7 @@ class MaiorEMenorTest extends PHPUnit
         $this->assertEquals("Geladeira", $maiorEMenor->getMaior()->getNome());
 
         // $this->assertInstanceOf("CDC\Loja\Produto\Produto", $maiorEMenor->getMenor());
-        // $this->assertInternalType("object", $maiorEMenor->getMenor());
+        // $this->assertInternalType("object", $maiorEMenor->getMenor()); // assertInternalType foi descontinuado https://github.com/sebastianbergmann/phpunit/issues/3369#issuecomment-522486250
+        // $this->assertIsObject($maiorEMenor->getMenor()); // Método utilizado no lugar do assertInternalType para o tipo "object"
     }
 }
