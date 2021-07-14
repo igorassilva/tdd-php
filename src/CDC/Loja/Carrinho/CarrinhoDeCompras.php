@@ -31,11 +31,11 @@ class CarrinhoDeCompras
             return 0;
         }
 
-        $maiorValor = $this->getProdutos()[0]->getValor();
+        $maiorValor = $this->getProdutos()[0]->getValorTotal();
 
         foreach ($this->getProdutos() as $produto) {
-            if ($maiorValor < $produto->getValor()) {
-                $maiorValor = $produto->getValor();
+            if ($maiorValor < $produto->getValorTotal()) {
+                $maiorValor = $produto->getValorTotal();
             }
         }
 
