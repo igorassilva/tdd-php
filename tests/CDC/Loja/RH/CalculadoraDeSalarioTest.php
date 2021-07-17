@@ -6,8 +6,7 @@ require "./vendor/autoload.php";
 
 use PHPUnit\Framework\TestCase as PHPUnit;
 use CDC\Loja\RH\CalculadoraDeSalario,
-    CDC\Loja\RH\Funcionario,
-    CDC\Loja\RH\TabelaCargos;
+    CDC\Loja\RH\Funcionario;;
 
 class CalculadoraDeSalarioTest extends PHPUnit
 {
@@ -15,7 +14,7 @@ class CalculadoraDeSalarioTest extends PHPUnit
     {
         $calculadora = new CalculadoraDeSalario();
         $desenvolvedor = new Funcionario(
-            "Andre", 1500.00, TabelaCargos::DESENVOLVEDOR
+            "Andre", 1500.00, "desenvolvedor"
         );
 
         $salario = $calculadora->calculaSalario($desenvolvedor);
@@ -27,7 +26,7 @@ class CalculadoraDeSalarioTest extends PHPUnit
     {
         $calculadora = new CalculadoraDeSalario();
         $desenvolvedor = new Funcionario(
-            "Andre", 4000.00, TabelaCargos::DESENVOLVEDOR
+            "Andre", 4000.00, "desenvolvedor"
         );
 
         $salario = $calculadora->calculaSalario($desenvolvedor);
@@ -38,10 +37,20 @@ class CalculadoraDeSalarioTest extends PHPUnit
     public function testDeveCalcularSalarioParaDBAsComSalarioAbaixoDoLimite()
     {
         $calculadora = new CalculadoraDeSalario();
-        $dba = new Funcionario("Andre", 500.00, TabelaCargos::DBA);
+        $dba = new Funcionario("Mauricio", 1500.00, "dba");
 
         $salario = $calculadora->calculaSalario($dba);
 
-        $this->assertEquals(500.00 * 0.85, $salario);
+        $this->assertEquals(1500.00 * 0.85, $salario);
+    }
+
+    public function testDeveCalcularSalarioParaDBAsComSalarioAcimaDoLimite()
+    {
+        $calculadora = new CalculadoraDeSalario();
+        $dba = new Funcionario("Mauricio", 4500.00, "dba");
+
+        $salario = $calculadora->calculaSalario($dba);
+
+        $this->assertEquals(4500.00 * 0.75, $salario);
     }
 }
